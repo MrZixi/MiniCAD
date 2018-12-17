@@ -87,6 +87,40 @@ public class CurveLine extends Shape {
 
     @Override
     public void changeSize(int flag) {
-        //不方便将折线的尺寸改变
+        int av_x = 0, av_y = 0;
+        for(Point p: points)
+        {
+            av_x += p.x;
+            av_y += p.y;
+        }
+        av_x /= points.size();
+        av_y /= points.size();
+        Point temp = new Point(av_x, av_y);
+        int total;
+        double portion_x;
+        double portion_y;
+        for(Point p: points)
+        {
+            total = Math.abs(p.x - temp.x) + Math.abs(p.y - temp.y);
+            portion_x = (double)Math.abs(p.x - temp.x) / (double)total;
+            portion_y = (double)Math.abs(p.y - temp.y) / (double)total;
+            if(p.x < temp.x)
+            {
+                p.x -= (int)(flag * portion_x * 10);
+            }
+            else if(p.x > temp.x)
+            {
+                p.x += (int)(flag * portion_x * 10);
+            }
+            if(p.y > temp.y)
+            {
+                p.y += (int)(flag * portion_y * 10);
+            }
+            else if(p.y < temp.y)
+            {
+                p.y -= (int)(flag * portion_y * 10);
+            }
+            //同样，防止横线的时候出错
+        }
     }
 }

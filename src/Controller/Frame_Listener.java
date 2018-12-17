@@ -137,14 +137,7 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
     }
     @Override
     public void mouseDragged(MouseEvent e) {//鼠标拖动过程中就要有效果
-        Perform_action(e);
-        /*try {
-            Thread.sleep(25);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }*/
+            Perform_action(e);
     }
 
     @Override
@@ -206,6 +199,8 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
                     }
                     break;
                 case KeyEvent.VK_B:
+                    Frame_Controller.ModelManager.remove(seletedShape);
+                    Frame_Controller.ModelManager.addTop(seletedShape);
                     break;
                 case KeyEvent.VK_T:
                     Frame_Controller.ModelManager.remove(seletedShape);
@@ -338,6 +333,13 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
                     {
                         Text temptext = (Text)seletedShape;
                         temptext.setContent(temp);
+                        Frame_Controller.updateView();
+                    }
+                }
+                else {
+                    if(temp_chosen != null)
+                    {
+                        seletedShape.color = temp_chosen;
                         Frame_Controller.updateView();
                     }
                 }
@@ -514,8 +516,11 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
         {
             Shape temp = Frame_Controller.ModelManager.getLast();
             //画上去的图形的最后一个点确定了
-            temp.p2.x = e.getX();
-            temp.p2.y = e.getY();
+            if(temp != null)
+            {
+                temp.p2.x = e.getX();
+                temp.p2.y = e.getY();
+            }
             Frame_Controller.updateView();
         }
         else

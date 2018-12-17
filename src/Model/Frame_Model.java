@@ -33,6 +33,10 @@ public class Frame_Model {
         }
 
     }
+    public void addTop(Shape s)
+    {
+        ShapeManager.add(0, s);
+    }
     public void remove(Shape s)
     {
         ShapeManager.remove(s);

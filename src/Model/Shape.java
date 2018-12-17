@@ -58,11 +58,13 @@ public abstract class Shape implements Serializable, Cloneable{
     }
     public void changeSize(int flag)//改变大小绝大多数图形都是改变两个固定点的位置，少数不能这么做的图像就override此函数
     {
-        int total = Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);//这里x和y改变的比例必须用一个量来统一，否则数值计算误差会使得图形变形
+        int total = Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+        //这里x和y改变的比例必须用一个量来统一，否则数值计算误差会使得图形变形
         double portion_x = (double)Math.abs(p1.x - p2.x) / (double)total;
         double portion_y = (double)Math.abs(p1.y - p2.y) / (double)total;
         setPointOrder();
-        if(p1.x < p2.x) //防止竖线的时候出错
+        //防止竖线的时候出错
+        if(p1.x < p2.x)
         {
             p1.x -= (int)(flag * portion_x * 10);
             p2.x += (int)(flag * portion_x * 10);
@@ -79,10 +81,6 @@ public abstract class Shape implements Serializable, Cloneable{
             p2.y += (int)(flag * portion_y * 10);
         }
         //同样，防止横线的时候出错
-        else
-        {
-
-        }
     }
     abstract public void draw(Graphics g);
     public void fill(Graphics g)
