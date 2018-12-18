@@ -15,7 +15,7 @@ import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+@SuppressWarnings("unchecked")
 public class Frame_Listener implements ActionListener, MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
     private Shape copyShape;
@@ -324,7 +324,7 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
                 Frame_Controller.updateView();
                 return;
             }
-            else if(seletedShape != null)
+            else if(seletedShape != null && Frame_Controller.state.equals("select"))
             {
                 if(seletedShape.getClass().equals(Text.class))
                 {
@@ -336,13 +336,11 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
                         Frame_Controller.updateView();
                     }
                 }
-                else {
                     if(temp_chosen != null)
                     {
                         seletedShape.color = temp_chosen;
                         Frame_Controller.updateView();
                     }
-                }
             }
         }
         else
@@ -426,7 +424,10 @@ public class Frame_Listener implements ActionListener, MouseListener, MouseMotio
                         seletedShape = null;
                         break;
                     case "text":
-                        Frame_Controller.ModelManager.add(new Text(now_p1, now_p2, text));
+                        if(text != null && !text.equals(""))
+                        {
+                            Frame_Controller.ModelManager.add(new Text(now_p1, now_p2, text));
+                        }
                         seletedShape = null;
                         break;
                     case "oval":

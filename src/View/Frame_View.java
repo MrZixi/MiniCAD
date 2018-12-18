@@ -116,7 +116,7 @@ public class Frame_View extends JFrame {
             temp.setActionCommand(color_names[i]);
             temp.addActionListener(Frame_Controller.listener);
             temp.addKeyListener(Frame_Controller.listener);
-            temp.addMouseListener(Frame_Controller.listener);
+          //  temp.addMouseListener(Frame_Controller.listener);
             color_panel.add(temp);
         }
         JPanel operator = new JPanel(new GridLayout(2, 1));

@@ -6,7 +6,6 @@ public abstract class Shape implements Serializable, Cloneable{
     public Color color;
     public Color fillin = Color.WHITE;
     public int thickness;
-    public static Color to_be_fillin;
     Shape()
     {
     }
