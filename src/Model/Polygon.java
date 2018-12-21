@@ -130,14 +130,20 @@ public class Polygon extends Shape {
     }
     @Override
     public boolean isSelected(Point p) {
-        if(p.x >= minx() && p.x <= maxx() && p.y >= miny() && p.y <= maxy())
+        java.awt.Polygon temp = new java.awt.Polygon();
+        for(int i = 0;i < points.size();i++)
+        {
+            temp.addPoint(points.get(i).x, points.get(i).y);
+        }
+        return temp.contains(p.x, p.y);
+       /* if(p.x >= minx() && p.x <= maxx() && p.y >= miny() && p.y <= maxy())
         {
             return true;
         }
         else
         {
             return false;
-        }
+        }*/
     }
     @Override
     public void draw(Graphics g) {

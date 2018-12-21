@@ -1,6 +1,9 @@
 package Model;
 
+import javafx.scene.shape.Ellipse;
+
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 public class Oval extends Shape {
     public Oval(Point p1, Point p2)
@@ -57,12 +60,16 @@ public class Oval extends Shape {
     public boolean isSelected(Point p)
     {
         this.setPointOrder();
-        if(p.x >= p1.x && p.x <= p2.x && p.y >= p1.y && p.y <= p2.y) {
+        Integer minx = minx(), miny = miny(), width = p2.x + p1.x - 2 * minx(), height = p2.y + p1.y - 2 * miny();
+        Ellipse2D temp = new Ellipse2D.Double(minx.doubleValue(), miny.doubleValue(), width.doubleValue(), height.doubleValue());
+        Integer px = p.x, py = p.y;
+        return temp.contains(px.doubleValue(), py.doubleValue());
+        /*if(p.x >= p1.x && p.x <= p2.x && p.y >= p1.y && p.y <= p2.y) {
             return true;
         }
         else
         {
             return false;
-        }
+        }*/
     }
 }
